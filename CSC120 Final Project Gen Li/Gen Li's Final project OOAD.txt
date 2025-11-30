@@ -1,0 +1,102 @@
+Object Oriented Analysis and Design (OOAD) Document Fleet Management System
+Created by: Gen Li
+
+1.1 Analysis Phase:
+This section identifies the domain entities, actors, function points, and typical usage scenarios for the Fleet Management System.
+
+1.2 Domain Analysis:
+Entities identified in the problem domain:
+- Boat: Represents each individual boat with attributes such as type, name, year, make/model, length, purchase price, and expenses.
+- FleetManagement: The system controller managing a collection of boats.
+- BoatType (enum): Represents categories of boats (SAILING, POWER).
+
+1.3 Actors:
+Human Actor:
+- User (Club Staff / Commodore): Interacts with the system to add boats, remove boats, view fleet, and record expenses.
+
+Non-human Actors:
+- File System: Used for reading CSV files and saving/loading serialized database.
+
+1.4 Function Points
+Functions performed by the User:
+- Add a new boat via CSV input
+- Remove an existing boat by name
+- Process a spending request
+- Print full fleet report
+- Exit system
+
+Functions performed by Non-actors:
+- Loading fleet from CSV file
+- Loading fleet from serialized database
+- Saving fleet to database on exit
+
+1.5 Scenarios:
+Scenario 1: Adding a Boat
+1.) User selects 'Add'.
+2.) System prompts for CSV boat data.
+3.) System constructs a Boat object.
+4.) System adds Boat to fleet.
+
+Scenario 2: Processing an Expense
+1.) User selects 'Expense'.
+2.) User enters boat name.
+3.) System finds the boat.
+4.) User enters expense amount.
+5.) System checks spending policy.
+6.) System approves or rejects the expense.
+
+Scenario 3: Printing Fleet
+1.) User selects 'Print'.
+2.) System prints each boat along with totals.
+Design Phase:
+Domain entities are now mapped to classes with detailed data definitions, constructors, methods, and access rules.
+
+2.1 Class Overview
+Classes:
+1.) Boat (Serializable)
+2.) BoatType (enum inside Boat)
+3.) FleetManagement (main controller class)
+
+2.2 Class: Boat
+Object Data (per boat):
+- type : BoatType (enum)
+- name : String
+- year : int
+- makeModel : String
+- length : int
+- purchasePrice : double
+- expenses : double
+
+Data Access:
+- All fields private
+- Accessors for name, purchasePrice, expenses
+- Mutators included only where logically needed (addExpense)
+
+Constructors:
+- Full constructor with all fields
+- CSV constructor for loading from text
+
+Methods:
+- canSpend(amount): policy check
+- addExpense(amount): mutator
+- getRemainingBudget(): helper
+- toString(): formatted output
+
+2.3 Class: FleetManagement
+Object Data:
+- fleet : ArrayList<Boat>
+- keyboard : Scanner
+- DB_FILE : final String
+
+Methods:
+- run(): main loop
+- getMenuChoice(): input validation
+- printFleet(): display output
+- addBoat(), removeBoat(), processExpense(): operations
+- findBoat(name): helper search
+- calculateTotalPurchases(), calculateTotalExpenses(): calculations
+- loadFromCSV(), loadFromDB(), saveToDB(): persistence
+
+Final Notes:
+This OOAD document follows the instructor's required structure, providing clear mapping from domain analysis → scenarios → class design.
+The design supports full functionality, good encapsulation, and clear separation of concerns.

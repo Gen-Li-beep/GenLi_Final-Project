@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"<Unnamed>","l":"Boat"},{"p":"<Unnamed>","l":"Boat.BoatType"},{"p":"<Unnamed>","l":"FleetManagement"},{"l":"所有类和接口","u":"allclasses-index.html"}];updateSearchResults();
